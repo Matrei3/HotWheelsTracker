@@ -20,7 +20,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/home-page.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
+        Scene scene = new Scene(fxmlLoader.load());
         HomePageController controller = fxmlLoader.getController();
         String[] parameters = getParameters().getRaw().toArray(new String[0]);
         Repository<Integer,Car> carRepository = new CarDatabaseRepository(parameters[0],parameters[1],parameters[2]);

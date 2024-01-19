@@ -3,6 +3,8 @@ package com.example.hotwheelstracker.Controller;
 import com.example.hotwheelstracker.Domain.Car;
 import com.example.hotwheelstracker.Utils.Events.CarChangeEvent;
 import com.example.hotwheelstracker.Utils.Observer.Observer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.awt.*;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,6 +32,8 @@ public class HomePageController implements Observer<CarChangeEvent> {
 
     @FXML
     private TextField carFilterer;
+    @FXML
+    private Label warningLabel;
     @FXML
     private TextField searchCarField;
     @FXML
@@ -149,12 +157,34 @@ public class HomePageController implements Observer<CarChangeEvent> {
     }
     public void addCarToCollection(ActionEvent actionEvent) {
         Car selectedCar = carsTable.getSelectionModel().getSelectedItem();
-        userCarsController.addCar(selectedCar);
+        if(selectedCar!=null) {
+            userCarsController.addCar(selectedCar);
+            warningLabel.setVisible(false);
+        }
+        else{
+            warningLabel.setText("No car selected for adding monsieur!");
+            warningLabel.setVisible(true);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(2.5), event -> warningLabel.setVisible(false)));
+            timeline.play();
+
+        }
     }
 
     public void deleteCarFromCollection(ActionEvent actionEvent) {
-        Car seletedCar = userCarsTable.getSelectionModel().getSelectedItem();
-        userCarsController.deleteCar(seletedCar);
+        Car selectedCar = userCarsTable.getSelectionModel().getSelectedItem();
+        if(selectedCar!=null) {
+            userCarsController.deleteCar(selectedCar);
+            warningLabel.setVisible(false);
+        }
+        else{
+
+            warningLabel.setText("No car selected for deleting monsieur!");
+            warningLabel.setVisible(true);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(2.5), event -> warningLabel.setVisible(false)));
+            timeline.play();
+        }
     }
 
     @Override
