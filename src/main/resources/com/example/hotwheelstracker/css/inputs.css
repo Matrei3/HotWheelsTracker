@@ -1,0 +1,13 @@
+/* styles.css */
+
+
+.label {
+    -fx-text-fill: #000000;
+}
+
+.label:hover{
+    -fx-text-fill: #afaafa;
+}
+.label:pressed{
+    -fx-text-fill: #affffa;
+}
