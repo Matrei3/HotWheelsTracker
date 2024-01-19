@@ -39,7 +39,7 @@
          </font>
       </Label>
       <Button layoutX="1057.0" layoutY="523.0" mnemonicParsing="false" onAction="#deleteCarFromCollection" text="Delete selected car" />
-      <TextField fx:id="searchCarField" layoutX="897.0" layoutY="523.0" promptText="Search Car" />
+      <TextField fx:id="searchCarField" layoutX="897.0" layoutY="523.0" promptText="Search User Cars" />
       <Label layoutX="371.0" layoutY="64.0" text="Car Table">
          <font>
             <Font size="25.0" />
