@@ -13,7 +13,7 @@ public class ImageRetriever {
     public static BufferedImage imageRetriever(String url) throws IOException {
 
         //String destinationFile = "resources/carImages/" + url;
-        if(url.contains("/wiki/"))//Some urls are broken
+        if (url.contains("/wiki/"))//Some urls are broken
             url = "https://static.wikia.nocookie.net/hotwheels/images/b/b5/Image_Not_Available.jpg/revision/latest?cb=20151025125428";
         return saveImage(url);
     }

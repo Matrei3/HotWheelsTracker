@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 import java.awt.image.BufferedImage;
 
-public class Car extends Entity<Integer>{
+public class Car extends Entity<Integer> {
     private Integer year;
     private Integer collectionNumber;
     private String modelName;

@@ -12,11 +12,13 @@ public class CarController {
     public CarController(Repository<Integer, Car> carRepository) {
         this.carRepository = carRepository;
     }
-    public List<Car> filterCarsByName(String nameToFilter){
+
+    public List<Car> filterCarsByName(String nameToFilter) {
         String capitalizedNameToFilter = Pattern.compile("^.").matcher(nameToFilter).replaceFirst(m -> m.group().toUpperCase());//Cars have uppercase first letters, so make the string have uppercase words
         return carRepository.findSome(capitalizedNameToFilter);
     }
-    public List<Car> allCars(){
+
+    public List<Car> allCars() {
         return carRepository.findAll();
     }
 }

@@ -12,10 +12,11 @@ public class CarChangeEvent implements Event {
         this.type = type;
         this.data = data;
     }
+
     public CarChangeEvent(ChangeEventType type, Car data, Car oldData) {
         this.type = type;
         this.data = data;
-        this.oldData=oldData;
+        this.oldData = oldData;
     }
 
     public ChangeEventType getType() {

@@ -14,8 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.awt.*;
+
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -69,45 +69,43 @@ public class HomePageController implements Observer<CarChangeEvent> {
         setColumns(tableColumnYearUser, tableColumnModelNameUser, tableColumnSeriesUser, tableColumnImageUser, tableColumnSeriesNumberUser);
         //if I press the hyperlink open a web page
         tableColumnImage.setCellFactory(cell -> {
-            return new TableCell<Car,Hyperlink>(){
-              @Override
-              protected void updateItem(Hyperlink item, boolean empty){
-                  super.updateItem(item,empty);
-                  if(item == null || empty){
-                      setGraphic(null);
-                  }
-                  else {
-                      item.setOnAction(event -> {
-                          try {
-                              Desktop.getDesktop().browse(new URI(item.getText()));
-                          } catch (IOException | URISyntaxException e) {
-                              e.printStackTrace();
-                          }
-                      });
-                      setGraphic(item);
-                  }
-              }
+            return new TableCell<Car, Hyperlink>() {
+                @Override
+                protected void updateItem(Hyperlink item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        item.setOnAction(event -> {
+                            try {
+                                Desktop.getDesktop().browse(new URI(item.getText()));
+                            } catch (IOException | URISyntaxException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        });
+                        setGraphic(item);
+                    }
+                }
             };
         });
         tableColumnImageUser.setCellFactory(cell -> {
-            return new TableCell<Car,Hyperlink>(){
-              @Override
-              protected void updateItem(Hyperlink item, boolean empty){
-                  super.updateItem(item,empty);
-                  if(item == null || empty){
-                      setGraphic(null);
-                  }
-                  else {
-                      item.setOnAction(event -> {
-                          try {
-                              Desktop.getDesktop().browse(new URI(item.getText()));
-                          } catch (IOException | URISyntaxException e) {
-                              e.printStackTrace();
-                          }
-                      });
-                      setGraphic(item);
-                  }
-              }
+            return new TableCell<Car, Hyperlink>() {
+                @Override
+                protected void updateItem(Hyperlink item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        item.setOnAction(event -> {
+                            try {
+                                Desktop.getDesktop().browse(new URI(item.getText()));
+                            } catch (IOException | URISyntaxException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        });
+                        setGraphic(item);
+                    }
+                }
             };
         });
         tableColumnYear.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 5% width
@@ -150,18 +148,19 @@ public class HomePageController implements Observer<CarChangeEvent> {
         List<Car> cars = carController.filterCarsByName(textToFilterBy);
         model.setAll(cars);
     }
-    private void loadUserCars(){
+
+    private void loadUserCars() {
         String textToFilterBy = searchCarField.getText();
         List<Car> userCars = userCarsController.filterByName(textToFilterBy);
         userCarsModel.setAll(userCars);
     }
+
     public void addCarToCollection(ActionEvent actionEvent) {
         Car selectedCar = carsTable.getSelectionModel().getSelectedItem();
-        if(selectedCar!=null) {
+        if (selectedCar != null) {
             userCarsController.addCar(selectedCar);
             warningLabel.setVisible(false);
-        }
-        else{
+        } else {
             warningLabel.setText("No car selected for adding monsieur!");
             warningLabel.setVisible(true);
             Timeline timeline = new Timeline(
@@ -173,11 +172,10 @@ public class HomePageController implements Observer<CarChangeEvent> {
 
     public void deleteCarFromCollection(ActionEvent actionEvent) {
         Car selectedCar = userCarsTable.getSelectionModel().getSelectedItem();
-        if(selectedCar!=null) {
+        if (selectedCar != null) {
             userCarsController.deleteCar(selectedCar);
             warningLabel.setVisible(false);
-        }
-        else{
+        } else {
 
             warningLabel.setText("No car selected for deleting monsieur!");
             warningLabel.setVisible(true);

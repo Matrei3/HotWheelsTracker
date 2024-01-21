@@ -31,7 +31,7 @@ public class UserCarsFileRepository extends FileRepository<Integer, Car> {
                 Integer id = Integer.parseInt(attr[0]);
                 Integer year = Integer.parseInt(attr[1]);
                 Integer colNumber = null;
-                if(!Objects.equals(attr[2], "null")) {
+                if (!Objects.equals(attr[2], "null")) {
 
                     colNumber = Integer.parseInt(attr[2]);
                 }
@@ -48,22 +48,22 @@ public class UserCarsFileRepository extends FileRepository<Integer, Car> {
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return cars;
     }
 
     @Override
     public Optional<Car> save(Car entity) {
-        try (FileWriter fileWriter = new FileWriter(filePath,true);
+        try (FileWriter fileWriter = new FileWriter(filePath, true);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
              PrintWriter out = new PrintWriter(bufferedWriter)
-            ) {
+        ) {
 
-            out.println(entity.getId() + "," + entity.getYear() + "," + entity.getCollectionNumber() + "," + entity.getModelName() + "," + entity.getSeriesBackgroundColor()+ "," + entity.getSeries() + ","+entity.getSeriesNumber() + "," + entity.getImageLink().getText());
+            out.println(entity.getId() + "," + entity.getYear() + "," + entity.getCollectionNumber() + "," + entity.getModelName() + "," + entity.getSeriesBackgroundColor() + "," + entity.getSeries() + "," + entity.getSeriesNumber() + "," + entity.getImageLink().getText());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -72,13 +72,12 @@ public class UserCarsFileRepository extends FileRepository<Integer, Car> {
     public Optional<Car> delete(Integer carId) {
         try {
             List<String> lines = Files.readAllLines(Path.of(filePath));
-            lines = lines.stream().filter(line -> Integer.parseInt(line.split(",")[0])!=carId).collect(Collectors.toList());
+            lines = lines.stream().filter(line -> Integer.parseInt(line.split(",")[0]) != carId).collect(Collectors.toList());
             Files.write(Path.of(filePath), lines);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-       return Optional.empty();
+        return Optional.empty();
 
     }
 
@@ -98,7 +97,7 @@ public class UserCarsFileRepository extends FileRepository<Integer, Car> {
                 Integer id = Integer.parseInt(attr[0]);
                 Integer year = Integer.parseInt(attr[1]);
                 Integer colNumber = null;
-                if(!Objects.equals(attr[2], "null")) {
+                if (!Objects.equals(attr[2], "null")) {
 
                     colNumber = Integer.parseInt(attr[2]);
                 }
@@ -111,9 +110,8 @@ public class UserCarsFileRepository extends FileRepository<Integer, Car> {
                 car.setId(id);
                 cars.add(car);
             });
-        }
-        catch (IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return cars;
     }

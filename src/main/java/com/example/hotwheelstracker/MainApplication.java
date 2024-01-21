@@ -23,16 +23,17 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         HomePageController controller = fxmlLoader.getController();
         String[] parameters = getParameters().getRaw().toArray(new String[0]);
-        Repository<Integer,Car> carRepository = new CarDatabaseRepository(parameters[0],parameters[1],parameters[2]);
+        Repository<Integer, Car> carRepository = new CarDatabaseRepository(parameters[0], parameters[1], parameters[2]);
         FileRepository<Integer, Car> fileRepository = new UserCarsFileRepository("src/main/java/com/example/hotwheelstracker/Data/user-cars.csv");
         UserCarsController userCarsController = new UserCarsController(fileRepository);
         CarController carController = new CarController(carRepository);
-        controller.setCarController(carController,userCarsController);
+        controller.setCarController(carController, userCarsController);
         stage.setTitle("Hot Wheels Tracker");
         stage.getIcons().add(new Image("com/example/hotwheelstracker/images/logo.png"));
         stage.setScene(scene);
         stage.show();
     }
+
     public static void main(String[] args) {
         launch(args);
         //not a great idea to load 9950 pictures into the project (waited 10 minutes for compile just for it to crash)
