@@ -1,4 +1,5 @@
-_Hot Wheels Car Tracker_
+**_Hot Wheels Car Tracker_**
+
 
 Technologies:
   - jsoup: for web scraping data about the cars from https://hotwheels.fandom.com/wiki/Hot_Wheels
